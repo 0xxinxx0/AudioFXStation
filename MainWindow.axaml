@@ -1,0 +1,90 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="AudioFXStation.MainWindow"
+        Title="AudioFXStation"
+        Width="1100"
+        Height="700"
+        MinWidth="850"
+        MinHeight="550"
+        Background="#0D1016"
+        Foreground="#E8EAF0">
+
+    <Grid RowDefinitions="60,*,90">
+        <Grid ColumnDefinitions="*,Auto"
+              Margin="22,0">
+            <StackPanel VerticalAlignment="Center" Spacing="3">
+                <TextBlock Text="Audio Visualizer" FontSize="17" FontWeight="Bold"/>
+                <TextBlock x:Name="FileNameText" Text="No audio loaded" FontSize="11" Foreground="#858C9D"/>
+            </StackPanel>
+            <Button Grid.Column="1" Content="Choose a file" Click="OpenAudio_Click"
+                    Background="#C6F277" Foreground="#151A10"
+                    Padding="18,9" VerticalAlignment="Center"/>
+        </Grid>
+
+        <Grid Grid.Row="1" ColumnDefinitions="*,280" Margin="22,8">
+            <Grid RowDefinitions="*,*">
+                <Border Background="#141923" CornerRadius="10" Padding="16" Margin="0,0,12,10">
+                    <Grid RowDefinitions="Auto,*">
+                        <TextBlock Text="Waveform" FontSize="15" FontWeight="SemiBold"/>
+                        <Border Grid.Row="1" Background="#0D1118" CornerRadius="7" Margin="0,14,0,0">
+                            <TextBlock Text="Open an audio file first..."
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Foreground="#858C9D"/>
+                        </Border>
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="1" Background="#141923" CornerRadius="10" Padding="16" Margin="0,0,12,0">
+                    <Grid RowDefinitions="Auto,*">
+                        <TextBlock Text="Spectrum" FontSize="15" FontWeight="SemiBold"/>
+                        <Border Grid.Row="1" Background="#0D1118" CornerRadius="7" Margin="0,14,0,0">
+                            <TextBlock Text="Waiting for audio..."
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Foreground="#858C9D"/>
+                        </Border>
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <Grid Grid.Column="1" RowDefinitions="*,*">
+                <Border Background="#141923" CornerRadius="10" Padding="16" Margin="0,0,0,10">
+                    <Grid RowDefinitions="Auto,*,Auto">
+                        <TextBlock Text="Equalizer" FontSize="15" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Row="2" Text="EQ not available yet"
+                                   FontSize="10" Foreground="#858C9D"/>
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="1" Background="#141923" CornerRadius="10" Padding="16">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="Effects" FontSize="15" FontWeight="SemiBold"/>
+                        <TextBlock Text="High-Pass Filter" Foreground="#B7BECD"/>
+                        <TextBlock Text="Compressor" Foreground="#B7BECD"/>
+                        <TextBlock Text="..." FontSize="10" Foreground="#858C9D"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Grid>
+
+        <Border Grid.Row="2" Background="#141923" Padding="22,12">
+            <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*,Auto">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <Button Content="▶" Click="Play_Click" Background="#C6F277" Foreground="#151A10" Padding="16,8"/>
+                    <Button Content="Ⅱ" Click="Pause_Click" Padding="14,8"/>
+                    <Button Content="■" Click="Stop_Click" Padding="14,8"/>
+                </StackPanel>
+
+                <TextBlock x:Name="PositionText" Grid.Column="1" Text="00:00 / 00:00"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <Slider x:Name="SeekSlider" Grid.Row="1" Grid.ColumnSpan="3"
+                        Minimum="0" Maximum="100" Value="0" Margin="0,12,0,0"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
