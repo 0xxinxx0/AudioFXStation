@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AudioFXStation")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+00290918bd9e396005c940475780e0a547e2a749")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dc99ca14f566ab6bb6903d2c8f437ad507fbcaba")]
 [assembly: System.Reflection.AssemblyProductAttribute("AudioFXStation")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AudioFXStation")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
