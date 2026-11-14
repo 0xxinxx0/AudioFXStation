@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AudioFX Station — UML диаграмма</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<style>
+  :root {
+    --bg-0:#070b1e; --bg-1:#0d1230; --bg-2:#141a3d;
+    --glass:rgba(255,255,255,0.05);
+    --glass-border:rgba(160,180,255,0.18);
+    --cyan:#5eead4; --magenta:#d98bff; --violet:#8b9dff; --text:#e6ecff; --muted:#9fb0d0;
+  }
+  * { box-sizing:border-box; }
+  html,body { margin:0; padding:0; }
+  body {
+    font-family:"Inter","Segoe UI",system-ui,sans-serif;
+    color:var(--text);
+    background:
+      radial-gradient(1200px 800px at 12% 8%, rgba(217,139,255,0.22), transparent 60%),
+      radial-gradient(1000px 700px at 88% 22%, rgba(94,234,212,0.18), transparent 60%),
+      radial-gradient(900px 900px at 60% 95%, rgba(139,157,255,0.20), transparent 60%),
+      linear-gradient(160deg, var(--bg-0), var(--bg-1) 45%, var(--bg-2));
+    background-attachment:fixed;
+    min-height:100vh;
+    padding:48px 24px 80px;
+  }
+  .wrap { max-width:1280px; margin:0 auto; }
+  header { text-align:center; margin-bottom:44px; }
+  h1 {
+    font-size:34px; font-weight:800; letter-spacing:0.5px; margin:0 0 8px;
+    background:linear-gradient(90deg,var(--cyan),var(--violet),var(--magenta));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  header p { color:var(--muted); font-size:15px; margin:0; }
+  .card {
+    background:var(--glass);
+    border:1px solid var(--glass-border);
+    border-radius:26px;
+    padding:28px 30px;
+    margin-bottom:34px;
+    backdrop-filter:blur(22px) saturate(140%);
+    -webkit-backdrop-filter:blur(22px) saturate(140%);
+    box-shadow:0 24px 60px rgba(0,0,0,0.45),
+               inset 0 1px 0 rgba(255,255,255,0.08),
+               inset 0 -1px 0 rgba(255,255,255,0.03);
+  }
+  .card h2 {
+    font-size:19px; font-weight:700; margin:0 0 4px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .card h2 .dot { width:10px; height:10px; border-radius:50%;
+    background:linear-gradient(135deg,var(--cyan),var(--magenta));
+    box-shadow:0 0 12px var(--cyan); }
+  .card .sub { color:var(--muted); font-size:13px; margin:0 0 20px; }
+  .mermaid { display:flex; justify-content:center; overflow-x:auto; }
+  .legend { display:flex; flex-wrap:wrap; gap:18px; margin-top:18px; font-size:12.5px; color:var(--muted); }
+  .legend span { display:inline-flex; align-items:center; gap:7px; }
+  .sw { width:14px; height:14px; border-radius:4px; display:inline-block; }
+  footer { text-align:center; color:var(--muted); font-size:12px; margin-top:10px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>AudioFX Station — UML</h1>
+    <p>Структура классов, паттерн Decorator в цепочке обработки аудио и последовательность взаимодействия</p>
+  </header>
+
+  <!-- DIAGRAM 1 -->
+  <section class="card">
+    <h2><span class="dot"></span>1. Диаграмма классов</h2>
+    <p class="sub">Все классы проекта и их статические связи. Ядро — интерфейс <b>ISampleProvider</b> (NAudio), который реализуют все провайдеры эффектов.</p>
+    <pre class="mermaid">
+classDiagram
+    direction LR
+
+    class ISampleProvider {
+        <<interface>>
+        +WaveFormat WaveFormat
+        +Read(Span~float~ buffer) int
+    }
+
+    class Program {
+        +Main(args) void$
+        +BuildAvaloniaApp() AppBuilder$
+    }
+    class App {
+        +Initialize() void
+        +OnFrameworkInitializationCompleted() void
+    }
+    class MainWindow {
+        -AudioFileReader audio
+        -WaveOut output
+        -EqualizerSampleProvider equalizer
+        -CompressorSampleProvider compressor
+        -ReverbSampleProvider reverb
+        -VarispeedSampleProvider rateProvider
+        -VolumeSampleProvider volumeProvider
+        -SpectrumSampleProvider spectrumProvider
+        -AudioSettings settings
+        -float[] waveformPeaks
+        -float[] spectrumValues
+        +OpenAudio_Click()
+        +Play_Click() / Pause_Click() / Stop_Click()
+        +Export_Click()
+        +OpenEqualizer_Click() / OpenCompressor_Click() / OpenReverb_Click()
+        -SaveSettings() / LoadSettings()
+        -LoadWaveform() / DrawWaveform()
+        -CreateSpectrum() / DrawSpectrum()
+        -UpdateTimeline() / UpdateTrim()
+        -SetSpeed(float)
+    }
+    class AudioSettings {
+        +float SubGain
+        +float BassGain
+        +float MidGain
+        +float HighMidGain
+        +float TrebleGain
+        +float Threshold
+        +float Ratio
+        +float Attack
+        +float Release
+        +float MakeupGain
+    }
+
+    class EqualizerSampleProvider {
+        -ISampleProvider source
+        -BiQuadFilter[][] filters
+        -BiQuadFilter[] highPassFilters
+        +SetFiveGains(sub,bass,mid,highMid,treble)
+        +SetGains(bass,mid,treble)
+        +SetHighPass(enabled,freq)
+        +Read(buffer) int
+    }
+    class CompressorSampleProvider {
+        -ISampleProvider source
+        -float envelope
+        -float gain
+        +float Threshold
+        +float Ratio
+        +float Attack
+        +float Release
+        +float MakeupGain
+        +float GainReduction
+        +SetSettings(threshold,ratio,attack,release,makeup)
+        +Read(buffer) int
+    }
+    class ReverbSampleProvider {
+        -ISampleProvider source
+        -float[][] combBuffers
+        -float[][] allPassBuffers
+        +float Mix
+        +float Decay
+        +SetMix(mix)
+        +SetDecay(decay)
+        +Read(buffer) int
+    }
+    class VarispeedSampleProvider {
+        -ISampleProvider source
+        -float[] current
+        -float[] next
+        +float Speed
+        +Read(buffer) int
+    }
+    class VolumeSampleProvider {
+        -ISampleProvider source
+        +float Volume
+        +SetVolume(volume)
+        +Read(buffer) int
+    }
+    class TrimSampleProvider {
+        -ISampleProvider source
+        -long maxSamples
+        -long samplesRead
+        +Read(buffer) int
+    }
+    class SpectrumSampleProvider {
+        -ISampleProvider source
+        -float[] spectrum
+        -Complex[] fft
+        +Read(buffer) int
+        -CalculateSpectrum()
+    }
+
+    class EqualizerWindow {
+        -EqualizerSampleProvider equalizer
+        -UpdateBands()
+        -DrawGraph()
+    }
+    class CompressorWindow {
+        -CompressorSampleProvider compressor
+        -DispatcherTimer timer
+        -UpdateSettings()
+        -UpdateMeter()
+    }
+    class ReverbWindow {
+        -ReverbSampleProvider reverb
+        -SetMix(value)
+    }
+
+    %% Наследование интерфейса
+    ISampleProvider <|.. EqualizerSampleProvider
+    ISampleProvider <|.. CompressorSampleProvider
+    ISampleProvider <|.. ReverbSampleProvider
+    ISampleProvider <|.. VarispeedSampleProvider
+    ISampleProvider <|.. VolumeSampleProvider
+    ISampleProvider <|.. TrimSampleProvider
+    ISampleProvider <|.. SpectrumSampleProvider
+
+    %% Program -> App -> MainWindow
+    Program ..> App : builds
+    App o-- MainWindow : creates
+
+    %% MainWindow владеет провайдерами (агрегация)
+    MainWindow o-- EqualizerSampleProvider
+    MainWindow o-- CompressorSampleProvider
+    MainWindow o-- ReverbSampleProvider
+    MainWindow o-- VarispeedSampleProvider
+    MainWindow o-- VolumeSampleProvider
+    MainWindow o-- SpectrumSampleProvider
+    MainWindow o-- AudioSettings : persists
+
+    %% Окна эффектов ссылаются на провайдеры
+    MainWindow ..> EqualizerWindow : opens
+    MainWindow ..> CompressorWindow : opens
+    MainWindow ..> ReverbWindow : opens
+    EqualizerWindow --> EqualizerSampleProvider : configures
+    CompressorWindow --> CompressorSampleProvider : configures
+    ReverbWindow --> ReverbSampleProvider : configures
+    </pre>
+    <div class="legend">
+      <span><span class="sw" style="background:#8b9dff"></span>◁ реализует ISampleProvider</span>
+      <span><span class="sw" style="background:#5eead4"></span>◇ агрегация (MainWindow владеет)</span>
+      <span><span class="sw" style="background:#d98bff"></span>→ ассоциация / конфигурация</span>
+      <span><span class="sw" style="background:#9fb0d0"></span>..> зависимость</span>
+    </div>
+  </section>
+
+  <!-- DIAGRAM 2 -->
+  <section class="card">
+    <h2><span class="dot"></span>2. Цепочка обработки аудио (паттерн Decorator)</h2>
+    <p class="sub">Каждый провайдер оборачивает предыдущий через поле <code>source : ISampleProvider</code>. Сигнал течёт слева направо к устройству вывода.</p>
+    <pre class="mermaid">
+flowchart LR
+    A["🎵 AudioFileReader<br/>(файл .mp3 / .wav)"]
+    EQ["EqualizerSampleProvider<br/>5-полосный EQ + HighPass"]
+    CP["CompressorSampleProvider<br/>Threshold / Ratio / Attack / Release"]
+    RV["ReverbSampleProvider<br/>Comb + AllPass"]
+    VS["VarispeedSampleProvider<br/>Speed (Slowed / Normal / Nightcore)"]
+    VO["VolumeSampleProvider<br/>Master Volume / Mute"]
+    SP["SpectrumSampleProvider<br/>FFT-анализ для визуализации"]
+    SW["SampleToWaveProvider"]
+    OUT["🔊 WaveOut<br/>(аудио-выход)"]
+
+    A --> EQ --> CP --> RV --> VS --> VO --> SP --> SW --> OUT
+
+    subgraph CANVAS["Рисование интерфейса"]
+      SP -. "spectrumValues[48]" .-> SPEC["SpectrumCanvas"]
+      A -. "waveformPeaks[1200]" .-> WAVE["WaveformCanvas"]
+    end
+    </pre>
+  </section>
+
+  <!-- DIAGRAM 3 -->
+  <section class="card">
+    <h2><span class="dot"></span>3. Последовательность: открытие файла и воспроизведение</h2>
+    <p class="sub">Как классы взаимодействуют в рантайме при загрузке аудио и запуске проигрывания.</p>
+    <pre class="mermaid">
+sequenceDiagram
+    autonumber
+    actor U as Пользователь
+    participant MW as MainWindow
+    participant FD as StorageProvider<br/>(OpenFilePicker)
+    participant AF as AudioFileReader
+    participant CH as Цепочка ISampleProvider<br/>(EQ→Comp→Reverb→Varispeed→Volume→Spectrum)
+    participant WO as WaveOut
+    participant T as DispatcherTimer
+
+    U->>MW: OpenAudio_Click()
+    MW->>FD: OpenFilePickerAsync()
+    FD-->>MW: выбранный путь файла
+    MW->>AF: new AudioFileReader(path)
+    MW->>CH: собрать цепочку провайдеров (Decorator)
+    MW->>WO: Init(new SampleToWaveProvider(spectrum))
+    MW->>AF: LoadWaveform() → waveformPeaks
+    MW-->>U: DrawWaveform() + обновить UI
+
+    U->>MW: Play_Click()
+    MW->>WO: Play()
+    loop каждый аудио-буфер
+      WO->>CH: Read(buffer)
+      CH->>AF: Read() (источник цепочки)
+      AF-->>CH: сэмплы
+      CH-->>WO: обработанные сэмплы + spectrumValues
+    end
+    T->>MW: Tick (100 мс) → UpdateTimeline()
+    MW-->>U: playhead + PositionText + DrawSpectrum()
+    </pre>
+  </section>
+
+  <!-- DIAGRAM 4 -->
+  <section class="card">
+    <h2><span class="dot"></span>4. Взаимодействие окон эффектов</h2>
+    <p class="sub">MainWindow открывает модальные окна, передавая ссылку на соответствующий провайдер; окно настраивает его в реальном времени.</p>
+    <pre class="mermaid">
+flowchart LR
+    MW["MainWindow"]
+    EQW["EqualizerWindow"]
+    CPW["CompressorWindow"]
+    RVW["ReverbWindow"]
+    EQP["EqualizerSampleProvider"]
+    CPP["CompressorSampleProvider"]
+    RVP["ReverbSampleProvider"]
+
+    MW -->|"new EqualizerWindow(equalizer).Show()"| EQW
+    MW -->|"new CompressorWindow(compressor).Show()"| CPW
+    MW -->|"new ReverbWindow(reverb).Show()"| RVW
+
+    EQW -->|"SetFiveGains()"| EQP
+    CPW -->|"SetSettings() / читает GainReduction"| CPP
+    RVW -->|"SetMix()"| RVP
+
+    CPP -. "GainReduction (обратная связь → метр)" .-> CPW
+    </pre>
+  </section>
+
+  <footer>Сгенерировано из исходного кода проекта AudioFXStation (Avalonia + NAudio). 14 классов.</footer>
+</div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      darkMode: true,
+      background: 'transparent',
+      primaryColor: 'rgba(139,157,255,0.14)',
+      primaryBorderColor: '#8b9dff',
+      primaryTextColor: '#e6ecff',
+      lineColor: '#5eead4',
+      secondaryColor: 'rgba(217,139,255,0.14)',
+      tertiaryColor: 'rgba(94,234,212,0.10)',
+      fontFamily: 'Inter, Segoe UI, sans-serif',
+      fontSize: '14px',
+      actorBkg: 'rgba(94,234,212,0.12)',
+      actorBorder: '#5eead4',
+      actorTextColor: '#e6ecff',
+      signalColor: '#9fb0d0',
+      signalTextColor: '#c7d3f0',
+      labelBoxBkgColor: 'rgba(217,139,255,0.12)',
+      labelBoxBorderColor: '#d98bff',
+      noteBkgColor: 'rgba(139,157,255,0.14)',
+      noteBorderColor: '#8b9dff',
+      activationBkgColor: 'rgba(217,139,255,0.16)',
+      activationBorderColor: '#d98bff',
+      clusterBkg: 'rgba(255,255,255,0.04)',
+      clusterBorder: 'rgba(160,180,255,0.25)'
+    },
+    classDiagram: { curve: 'basis' },
+    flowchart: { curve: 'basis', htmlLabels: true, padding: 16 },
+    sequence: { useMaxWidth: true, showSequenceNumbers: false }
+  });
+</script>
+</body>
+</html>
