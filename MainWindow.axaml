@@ -2,143 +2,272 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="1024" d:DesignHeight="656"
         x:Class="AudioFXStation.MainWindow"
-        Title="AudioFXStation"
-        Width="1100"
-        Height="700"
-        MinWidth="850"
-        MinHeight="550"
-        Foreground="#F0F3F4">
+        Title="AudioFX Station"
+        Width="1024"
+        Height="656"
+        MinWidth="900"
+        MinHeight="600"
+        Foreground="#E8EEF5">
 
     <Window.Background>
         <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
-            <GradientStop Color="#111A16" Offset="0"/>
-            <GradientStop Color="#0B1018" Offset="0.52"/>
-            <GradientStop Color="#11181B" Offset="1"/>
+            <GradientStop Color="#111821" Offset="0"/>
+            <GradientStop Color="#0B1118" Offset="0.55"/>
+            <GradientStop Color="#131D27" Offset="1"/>
         </LinearGradientBrush>
     </Window.Background>
 
     <Window.Styles>
         <Style Selector="Button">
-            <Setter Property="Background" Value="#202B27"/>
-            <Setter Property="Foreground" Value="#E7ECEE"/>
-            <Setter Property="BorderBrush" Value="#3B493E"/>
+            <Setter Property="Background" Value="#1B2633"/>
+            <Setter Property="Foreground" Value="#E8EEF5"/>
+            <Setter Property="BorderBrush" Value="#334252"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="CornerRadius" Value="14"/>
-            <Setter Property="Padding" Value="16,9"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="12,0"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="MinWidth" Value="40"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="RenderTransformOrigin" Value="50%,50%"/>
+            <Setter Property="RenderTransform" Value="scale(1)"/>
             <Setter Property="Transitions">
                 <Transitions>
-                    <BrushTransition Property="Background" Duration="0:0:0.16"/>
-                    <BrushTransition Property="BorderBrush" Duration="0:0:0.16"/>
-                    <DoubleTransition Property="Opacity" Duration="0:0:0.16"/>
+                    <BrushTransition Property="Background" Duration="0:0:0.18"/>
+                    <BrushTransition Property="BorderBrush" Duration="0:0:0.18"/>
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.18"/>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.14"/>
                 </Transitions>
             </Setter>
         </Style>
         <Style Selector="Button:pointerover">
-            <Setter Property="Background" Value="#2E3D32"/>
-            <Setter Property="BorderBrush" Value="#718957"/>
+            <Setter Property="Background" Value="#263646"/>
+            <Setter Property="BorderBrush" Value="#5A8292"/>
+            <Setter Property="RenderTransform" Value="scale(1.015)"/>
         </Style>
         <Style Selector="Button:pressed">
-            <Setter Property="Background" Value="#334638"/>
-            <Setter Property="BorderBrush" Value="#C6F277"/>
-            <Setter Property="Opacity" Value="0.88"/>
+            <Setter Property="Background" Value="#314657"/>
+            <Setter Property="BorderBrush" Value="#63D7BD"/>
+            <Setter Property="Opacity" Value="0.9"/>
+            <Setter Property="RenderTransform" Value="scale(0.975)"/>
+        </Style>
+        <Style Selector="Button:focus">
+            <Setter Property="BorderBrush" Value="#63D7BD"/>
+        </Style>
+        <Style Selector="Button:disabled">
+            <Setter Property="Opacity" Value="0.45"/>
         </Style>
         <Style Selector="Button.accent">
-            <Setter Property="Background" Value="#C6F277"/>
-            <Setter Property="Foreground" Value="#18200F"/>
-            <Setter Property="BorderBrush" Value="#D8FFA0"/>
+            <Setter Property="Background" Value="#63D7BD"/>
+            <Setter Property="Foreground" Value="#10221F"/>
+            <Setter Property="BorderBrush" Value="#8BE8D4"/>
         </Style>
         <Style Selector="Button.accent:pointerover">
-            <Setter Property="Background" Value="#D2F995"/>
-            <Setter Property="BorderBrush" Value="#E4FFB8"/>
+            <Setter Property="Background" Value="#7AE4CC"/>
+            <Setter Property="BorderBrush" Value="#A8F0E1"/>
         </Style>
         <Style Selector="Button.accent:pressed">
-            <Setter Property="Background" Value="#A9D85D"/>
-            <Setter Property="BorderBrush" Value="#C6F277"/>
+            <Setter Property="Background" Value="#49BFA6"/>
+            <Setter Property="BorderBrush" Value="#63D7BD"/>
+        </Style>
+        <Style Selector="Button.compact">
+            <Setter Property="Height" Value="27"/>
+            <Setter Property="Padding" Value="6,0"/>
+            <Setter Property="MinWidth" Value="0"/>
+            <Setter Property="FontSize" Value="9"/>
+            <Setter Property="CornerRadius" Value="8"/>
+        </Style>
+        <Style Selector="Button.effect">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Padding" Value="10,0"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="CornerRadius" Value="9"/>
+        </Style>
+        <Style Selector="Button.transport">
+            <Setter Property="Width" Value="36"/>
+            <Setter Property="Height" Value="36"/>
+            <Setter Property="MinWidth" Value="36"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="CornerRadius" Value="12"/>
+        </Style>
+        <Style Selector="Button.transport.secondary">
+            <Setter Property="Width" Value="32"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="MinWidth" Value="32"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Background" Value="#19232E"/>
+            <Setter Property="BorderBrush" Value="#2B3A48"/>
         </Style>
         <Style Selector="CheckBox">
-            <Setter Property="Foreground" Value="#E7ECEE"/>
+            <Setter Property="Foreground" Value="#D9E2EA"/>
+        </Style>
+        <Style Selector="Border.panel">
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.22"/>
+                    <BrushTransition Property="BorderBrush" Duration="0:0:0.22"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Border.panel:pointerover">
+            <Setter Property="BorderBrush" Value="#536F7C"/>
         </Style>
     </Window.Styles>
 
-    <Grid RowDefinitions="76,*,94">
-        <Grid ColumnDefinitions="Auto,*,Auto" Margin="26,0">
-            <Border Width="40" Height="40" CornerRadius="14" Background="#25311F" BorderBrush="#586A3C" BorderThickness="1" VerticalAlignment="Center">
-                <TextBlock Text="A" FontSize="20" FontWeight="Bold" Foreground="#C6F277" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <Grid RowDefinitions="60,*,96">
+        <Grid ColumnDefinitions="Auto,*,Auto" Margin="18,0">
+            <Border Width="36" Height="36" CornerRadius="12" BorderBrush="#42645F" BorderThickness="1" VerticalAlignment="Center" BoxShadow="0 5 18 0 #50000000">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                        <GradientStop Color="#326D65" Offset="0"/>
+                        <GradientStop Color="#1A3437" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <TextBlock Text="A" FontSize="17" FontWeight="Bold" Foreground="#7BE2C9" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Border>
-            <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="13,0,0,0" Spacing="3">
-                <TextBlock Text="AudioFX Station" FontSize="18" FontWeight="Bold" Foreground="#F1F4F2"/>
-                <TextBlock x:Name="FileNameText" Text="No audio loaded" FontSize="11" Foreground="#93A09D"/>
+            <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0" Spacing="2">
+                <TextBlock Text="AudioFX Station" FontSize="15" FontWeight="Bold" Foreground="#F1F5F8"/>
+                <TextBlock x:Name="FileNameText" Text="No audio loaded" FontSize="9" Foreground="#91A1AF"/>
             </StackPanel>
-            <Button Grid.Column="2" Classes="accent" Content="Choose a file" Click="OpenAudio_Click" Padding="19,10" VerticalAlignment="Center"/>
+            <Button Grid.Column="2" Classes="accent" Content="＋  Open audio" Click="OpenAudio_Click" Padding="14,0" VerticalAlignment="Center"/>
         </Grid>
 
-        <Grid Grid.Row="1" ColumnDefinitions="*,292" Margin="26,8">
-            <Grid RowDefinitions="1.08*,0.92*">
-                <Border Background="#E017211F" BorderBrush="#3A473C" BorderThickness="1" CornerRadius="20" Padding="18" Margin="0,0,14,12">
-                    <Grid RowDefinitions="Auto,*">
-                        <StackPanel Spacing="3">
-                            <TextBlock Text="Waveform" FontSize="15" FontWeight="SemiBold" Foreground="#F0F3F4"/>
-                            <TextBlock Text="AUDIO SIGNAL" FontSize="9" FontWeight="SemiBold" Foreground="#909A87"/>
-                        </StackPanel>
-                        <Border Grid.Row="1" Background="#0D1411" BorderBrush="#2A382E" BorderThickness="1" CornerRadius="14" Margin="0,12,0,0">
-                            <Canvas x:Name="WaveformCanvas" ClipToBounds="True"/>
+        <Grid Grid.Row="1" ColumnDefinitions="*,248" ColumnSpacing="11" Margin="18,3,18,8">
+            <Grid RowDefinitions="1.18*,0.82*" RowSpacing="11">
+                <Border Classes="panel" Background="#151F2A" BorderBrush="#293947" BorderThickness="1" CornerRadius="15" Padding="13" BoxShadow="0 8 22 0 #45000000">
+                    <Grid RowDefinitions="Auto,*,Auto">
+                        <Grid ColumnDefinitions="*,Auto" Margin="0,0,0,8">
+                            <StackPanel Spacing="2">
+                                <TextBlock Text="Waveform" FontSize="14" FontWeight="SemiBold" Foreground="#F0F5F7"/>
+                                <TextBlock Text="TRACK OVERVIEW" FontSize="8" FontWeight="Bold" Foreground="#78909D"/>
+                            </StackPanel>
+                            <Border Grid.Column="1" Background="#1D302F" BorderBrush="#31594F" BorderThickness="1" CornerRadius="7" Padding="7,4" VerticalAlignment="Center">
+                                <TextBlock Text="AUDIO" FontSize="8" FontWeight="Bold" Foreground="#75DCC2"/>
+                            </Border>
+                        </Grid>
+                        <Border Grid.Row="1" Background="#0D151D" BorderBrush="#273744" BorderThickness="1" CornerRadius="11" ClipToBounds="True">
+                            <Grid>
+                                <Border Height="1" Background="#182631" VerticalAlignment="Center"/>
+                                <Canvas x:Name="WaveformCanvas" ClipToBounds="True"/>
+                                <StackPanel x:Name="WaveformEmptyState" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="7" IsHitTestVisible="False">
+                                    <Border Width="32" Height="32" CornerRadius="11" Background="#1A2B31" BorderBrush="#31554F" BorderThickness="1" HorizontalAlignment="Center">
+                                        <TextBlock Text="〰" FontSize="18" Foreground="#72DCC2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                    <TextBlock Text="Your waveform will appear here" FontSize="10" FontWeight="SemiBold" Foreground="#DCE6E8" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="Open an audio file to get started" FontSize="9" Foreground="#81919D" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                        <Border Grid.Row="2" Background="#111A23" BorderBrush="#263743" BorderThickness="1" CornerRadius="10" Padding="10,7" Margin="0,8,0,0">
+                            <Grid ColumnDefinitions="*,*" ColumnSpacing="10" RowDefinitions="Auto,Auto">
+                                <StackPanel Grid.Column="0" Spacing="3">
+                                    <Grid ColumnDefinitions="*,Auto">
+                                        <TextBlock Text="Selection start" FontSize="10" Foreground="#9AAAB5" VerticalAlignment="Center"/>
+                                        <TextBlock x:Name="TrimStartValue" Grid.Column="1" Text="0.00 s" FontSize="10" FontWeight="SemiBold" Foreground="#72DCC2"/>
+                                    </Grid>
+                                    <Slider x:Name="TrimStartSlider" Minimum="0" Maximum="100" Value="0" Height="36" MinHeight="36" ValueChanged="TrimStartSlider_ValueChanged"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" Spacing="3">
+                                    <Grid ColumnDefinitions="*,Auto">
+                                        <TextBlock Text="Selection end" FontSize="10" Foreground="#9AAAB5" VerticalAlignment="Center"/>
+                                        <TextBlock x:Name="TrimEndValue" Grid.Column="1" Text="100.00 s" FontSize="10" FontWeight="SemiBold" Foreground="#72DCC2"/>
+                                    </Grid>
+                                    <Slider x:Name="TrimEndSlider" Minimum="0" Maximum="100" Value="100" Height="36" MinHeight="36" ValueChanged="TrimEndSlider_ValueChanged"/>
+                                </StackPanel>
+                                <TextBlock x:Name="TrimDurationText" Grid.Row="1" Grid.ColumnSpan="2" Text="Duration: 100.00 s" FontSize="9" Foreground="#81919D" Margin="0,5,0,0"/>
+                            </Grid>
                         </Border>
                     </Grid>
                 </Border>
 
-                <Border Grid.Row="1" Background="#E017211F" BorderBrush="#3A473C" BorderThickness="1" CornerRadius="20" Padding="18" Margin="0,0,14,0">
+                <Border Grid.Row="1" Classes="panel" Background="#151F2A" BorderBrush="#293947" BorderThickness="1" CornerRadius="15" Padding="13" BoxShadow="0 8 22 0 #45000000">
                     <Grid RowDefinitions="Auto,*">
-                        <StackPanel Spacing="3">
-                            <TextBlock Text="Frequency spectrum" FontSize="15" FontWeight="SemiBold" Foreground="#F0F3F4"/>
-                            <TextBlock Text="REAL-TIME ANALYSIS" FontSize="9" FontWeight="SemiBold" Foreground="#909A87"/>
+                        <StackPanel Spacing="2" Margin="0,0,0,8">
+                            <TextBlock Text="Frequency spectrum" FontSize="14" FontWeight="SemiBold" Foreground="#F0F5F7"/>
+                            <TextBlock Text="REAL-TIME ANALYSIS" FontSize="8" FontWeight="Bold" Foreground="#78909D"/>
                         </StackPanel>
-                        <Border Grid.Row="1" Background="#0D1411" BorderBrush="#2A382E" BorderThickness="1" CornerRadius="14" Margin="0,12,0,0">
-                            <Canvas x:Name="SpectrumCanvas" ClipToBounds="True"/>
+                        <Border Grid.Row="1" Background="#0D151D" BorderBrush="#273744" BorderThickness="1" CornerRadius="11" ClipToBounds="True">
+                            <Grid>
+                                <Canvas x:Name="SpectrumCanvas" ClipToBounds="True"/>
+                                <StackPanel x:Name="SpectrumEmptyState" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="7" IsHitTestVisible="False">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="5" Height="28" VerticalAlignment="Center">
+                                        <Border Width="4" Height="11" CornerRadius="2" Background="#317669" VerticalAlignment="Center"/>
+                                        <Border Width="4" Height="20" CornerRadius="2" Background="#4DB99F" VerticalAlignment="Center"/>
+                                        <Border Width="4" Height="15" CornerRadius="2" Background="#72DCC2" VerticalAlignment="Center"/>
+                                        <Border Width="4" Height="25" CornerRadius="2" Background="#4DB99F" VerticalAlignment="Center"/>
+                                        <Border Width="4" Height="10" CornerRadius="2" Background="#317669" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                    <TextBlock Text="A little room for sound" FontSize="10" FontWeight="SemiBold" Foreground="#DCE6E8" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="The spectrum comes alive during playback" FontSize="9" Foreground="#81919D" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </Grid>
                         </Border>
                     </Grid>
                 </Border>
             </Grid>
 
-            <Grid Grid.Column="1" RowDefinitions="1.15*,0.85*">
-                <Border Background="#E017211F" BorderBrush="#3A473C" BorderThickness="1" CornerRadius="20" Padding="18" Margin="0,0,0,12">
-                    <Grid RowDefinitions="Auto,*">
-                        <StackPanel Spacing="3">
-                            <TextBlock Text="Equalizer" FontSize="15" FontWeight="SemiBold" Foreground="#F0F3F4"/>
-                            <TextBlock Text="3-BAND TONE CONTROL" FontSize="9" FontWeight="SemiBold" Foreground="#909A87"/>
+            <Border Grid.Column="1" Classes="panel" Background="#151F2A" BorderBrush="#293947" BorderThickness="1" CornerRadius="15" Padding="13" BoxShadow="0 8 22 0 #45000000">
+                <StackPanel Spacing="9">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <StackPanel Spacing="2">
+                            <TextBlock Text="Audio effects" FontSize="15" FontWeight="Bold" Foreground="#F0F5F7"/>
+                            <TextBlock Text="SHAPE YOUR SOUND" FontSize="8" FontWeight="Bold" Foreground="#78909D"/>
                         </StackPanel>
-                        <StackPanel Grid.Row="1" Spacing="3" Margin="0,10,0,0">
-                            <TextBlock Text="BASS" Foreground="#AEB8AA" FontSize="10" FontWeight="SemiBold"/>
-                            <Slider x:Name="BassSlider" Minimum="-12" Maximum="12" Value="0" Height="35"/>
-                            <TextBlock Text="MID" Foreground="#AEB8AA" FontSize="10" FontWeight="SemiBold"/>
-                            <Slider x:Name="MidSlider" Minimum="-12" Maximum="12" Value="0" Height="35"/>
-                            <TextBlock Text="TREBLE" Foreground="#AEB8AA" FontSize="10" FontWeight="SemiBold"/>
-                            <Slider x:Name="TrebleSlider" Minimum="-12" Maximum="12" Value="0" Height="35"/>
-                        </StackPanel>
+                        <Border Grid.Column="1" Background="#1D302F" BorderBrush="#31594F" BorderThickness="1" CornerRadius="7" Padding="7,4" VerticalAlignment="Center">
+                            <TextBlock Text="03 EFFECTS" FontSize="7" FontWeight="Bold" Foreground="#75DCC2"/>
+                        </Border>
                     </Grid>
-                </Border>
 
-                <Border Grid.Row="1" Background="#E017211F" BorderBrush="#3A473C" BorderThickness="1" CornerRadius="20" Padding="18">
-                    <StackPanel Spacing="7" VerticalAlignment="Center">
-                        <CheckBox x:Name="HighPassToggle" Content="High-Pass Filter" FontSize="14" FontWeight="SemiBold"/>
-                        <TextBlock Text="Cutoff frequency" Foreground="#AEB8AA" FontSize="11" Margin="0,4,0,0"/>
-                        <Slider x:Name="HighPassSlider" Minimum="20" Maximum="500" Value="100" Height="35"/>
-                        <TextBlock x:Name="HighPassValue" Text="100 Hz" Foreground="#C6F277" FontSize="12" FontWeight="SemiBold"/>
+                    <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="7" RowSpacing="7">
+                        <Button Grid.ColumnSpan="2" Content="5-Band Equalizer" Click="OpenEqualizer_Click" Classes="effect" HorizontalContentAlignment="Left"/>
+                        <Button Grid.Row="1" Content="Compressor" Click="OpenCompressor_Click" Classes="effect"/>
+                        <Button Grid.Row="1" Grid.Column="1" Content="Reverb" Click="OpenReverb_Click" Classes="effect"/>
+                    </Grid>
+
+                    <Border Height="1" Background="#283744"/>
+
+                    <StackPanel Spacing="6">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <TextBlock Text="SPEED &amp; PITCH" Foreground="#75DCC2" FontWeight="Bold" FontSize="9" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="SpeedValue" Grid.Column="1" Foreground="#75DCC2" Text="1.00x" FontSize="10" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Slider x:Name="SpeedSlider" Minimum="0.5" Maximum="2" Value="1" TickFrequency="0.05" Height="36" MinHeight="36" ValueChanged="SpeedSlider_ValueChanged"/>
+                        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="6">
+                            <Button Content="Slowed" Click="Slowed_Click" Classes="compact" HorizontalAlignment="Stretch"/>
+                            <Button Grid.Column="1" Classes="accent compact" Content="Normal" Click="Normal_Click" HorizontalAlignment="Stretch"/>
+                            <Button Grid.Column="2" Content="Nightcore" Click="Nightcore_Click" Classes="compact" HorizontalAlignment="Stretch"/>
+                        </Grid>
+                    </StackPanel>
+
+                    <Border Background="#111A23" BorderBrush="#263743" BorderThickness="1" CornerRadius="10" Padding="9,7">
+                        <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,Auto" RowSpacing="4" ColumnSpacing="8">
+                            <TextBlock Text="MASTER VOLUME" FontSize="9" FontWeight="Bold" Foreground="#9AAAB5" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="VolumeValue" Grid.Column="1" Text="100%" FontSize="10" FontWeight="SemiBold" Foreground="#75DCC2" VerticalAlignment="Center"/>
+                            <Slider x:Name="VolumeSlider" Grid.Row="1" Minimum="0" Maximum="150" Value="100" Height="36" MinHeight="36" VerticalAlignment="Center" ValueChanged="VolumeSlider_ValueChanged"/>
+                            <Button x:Name="MuteButton" Grid.Row="1" Grid.Column="1" Content="Mute" Click="Mute_Click" Classes="compact" Padding="8,0"/>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <Border Grid.Row="2" Classes="panel" Margin="18,0,18,8" Background="#151F2A" BorderBrush="#293947" BorderThickness="1" CornerRadius="15" Padding="14,9" BoxShadow="0 8 22 0 #45000000">
+            <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*,Auto" RowSpacing="5">
+                <TextBlock x:Name="PositionText" Text="00:00 / 00:00" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="10" FontWeight="SemiBold" Foreground="#C6D2DB"/>
+                <Border Grid.Column="1" Background="#101922" BorderBrush="#293947" BorderThickness="1" CornerRadius="13" Padding="4,3" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="6">
+                    <Button Classes="transport accent" Content="▶" Click="Play_Click"/>
+                        <Button Classes="transport secondary" Content="Ⅱ" Click="Pause_Click"/>
+                        <Button Classes="transport secondary" Content="■" Click="Stop_Click"/>
                     </StackPanel>
                 </Border>
-            </Grid>
-        </Grid>
-
-        <Border Grid.Row="2" Background="#F0141D19" BorderBrush="#3A473C" BorderThickness="1,1,1,0" Padding="26,12">
-            <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*,Auto">
-                <StackPanel Orientation="Horizontal" Spacing="8">
-                    <Button Classes="accent" Content="▶" Click="Play_Click" Padding="17,8"/>
-                    <Button Content="Ⅱ" Click="Pause_Click" Padding="15,8"/>
-                    <Button Content="■" Click="Stop_Click" Padding="15,8"/>
-                </StackPanel>
-                <TextBlock x:Name="PositionText" Grid.Column="1" Text="00:00 / 00:00" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" FontWeight="SemiBold" Foreground="#D6DEDA"/>
-                <Slider x:Name="SeekSlider" Grid.Row="1" Grid.ColumnSpan="3" Minimum="0" Maximum="100" Value="0" Margin="0,9,0,0" Height="35"/>
+                <Button Grid.Column="2" Content="Export" Click="Export_Click" Classes="compact" HorizontalAlignment="Right"/>
+                <Slider x:Name="SeekSlider" Grid.Row="1" Grid.ColumnSpan="3" Minimum="0" Maximum="100" Value="0" Height="36" MinHeight="36"/>
             </Grid>
         </Border>
     </Grid>

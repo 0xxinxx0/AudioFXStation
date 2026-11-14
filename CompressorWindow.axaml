@@ -1,0 +1,119 @@
+
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="AudioFXStation.CompressorWindow"
+        Width="660"
+        Height="700"
+        MinWidth="560"
+        MinHeight="560"
+        Title="Compressor"
+        Foreground="#F0F3F4"
+        WindowStartupLocation="CenterOwner">
+
+    <Window.Background>
+        <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+            <GradientStop Color="#191525" Offset="0"/>
+            <GradientStop Color="#0C0A12" Offset="0.55"/>
+            <GradientStop Color="#1B1525" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
+
+    <Window.Styles>
+        <Style Selector="Border.control-card">
+            <Setter Property="Background" Value="#B5222B3B"/>
+            <Setter Property="BorderBrush" Value="#735B7E"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="15"/>
+            <Setter Property="BoxShadow" Value="0 7 20 0 #40000000"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.22"/>
+                    <BrushTransition Property="BorderBrush" Duration="0:0:0.22"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Border.control-card:pointerover">
+            <Setter Property="Background" Value="#D6372E4A"/>
+            <Setter Property="BorderBrush" Value="#B5A0EA"/>
+        </Style>
+        <Style Selector="Slider">
+            <Setter Property="Foreground" Value="#C7A1FF"/>
+        </Style>
+    </Window.Styles>
+
+    <Grid RowDefinitions="Auto,*" Margin="26">
+        <Grid ColumnDefinitions="*,Auto" VerticalAlignment="Center">
+            <StackPanel Spacing="5">
+                <TextBlock Text="Compressor" FontSize="25" FontWeight="Bold"/>
+                <TextBlock Text="DYNAMIC RANGE CONTROL" FontSize="10" FontWeight="SemiBold" Foreground="#B9A8D0"/>
+            </StackPanel>
+            <Border Grid.Column="1" Background="#30233F" BorderBrush="#78628D" BorderThickness="1" CornerRadius="12" Padding="12,7" VerticalAlignment="Center">
+                <TextBlock Text="DYNAMICS" FontSize="9" FontWeight="SemiBold" Foreground="#C7A1FF"/>
+            </Border>
+        </Grid>
+
+        <ScrollViewer Grid.Row="1" Margin="0,18,0,0" VerticalScrollBarVisibility="Auto">
+            <StackPanel Spacing="11">
+                <Border Classes="control-card" Padding="16,12">
+                    <StackPanel Spacing="6">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <TextBlock Text="Threshold" FontWeight="SemiBold"/>
+                            <TextBlock x:Name="ThresholdValue" Grid.Column="1" Foreground="#C7A1FF" FontWeight="SemiBold"/>
+                        </Grid>
+                        <Slider x:Name="ThresholdSlider" Minimum="-60" Maximum="0" Value="-18"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Classes="control-card" Padding="16,12">
+                    <StackPanel Spacing="6">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <TextBlock Text="Ratio" FontWeight="SemiBold"/>
+                            <TextBlock x:Name="RatioValue" Grid.Column="1" Foreground="#C7A1FF" FontWeight="SemiBold"/>
+                        </Grid>
+                        <Slider x:Name="RatioSlider" Minimum="1" Maximum="20" Value="4"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Classes="control-card" Padding="16,12">
+                    <StackPanel Spacing="6">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <TextBlock Text="Attack (ms)" FontWeight="SemiBold"/>
+                            <TextBlock x:Name="AttackValue" Grid.Column="1" Foreground="#C7A1FF" FontWeight="SemiBold"/>
+                        </Grid>
+                        <Slider x:Name="AttackSlider" Minimum="1" Maximum="100" Value="10"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Classes="control-card" Padding="16,12">
+                    <StackPanel Spacing="6">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <TextBlock Text="Release (ms)" FontWeight="SemiBold"/>
+                            <TextBlock x:Name="ReleaseValue" Grid.Column="1" Foreground="#C7A1FF" FontWeight="SemiBold"/>
+                        </Grid>
+                        <Slider x:Name="ReleaseSlider" Minimum="10" Maximum="500" Value="100"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Classes="control-card" Padding="16,12">
+                    <StackPanel Spacing="6">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <TextBlock Text="Makeup Gain (dB)" FontWeight="SemiBold"/>
+                            <TextBlock x:Name="MakeupValue" Grid.Column="1" Foreground="#C7A1FF" FontWeight="SemiBold"/>
+                        </Grid>
+                        <Slider x:Name="MakeupSlider" Minimum="0" Maximum="24" Value="0"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Classes="control-card" Padding="16,12" Margin="0,2,0,0">
+                    <StackPanel Spacing="9">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <TextBlock Text="GAIN REDUCTION" FontSize="10" FontWeight="SemiBold" Foreground="#B9A8D0"/>
+                            <TextBlock x:Name="ReductionText" Text="0.0 dB" Grid.Column="1" Foreground="#C7A1FF" FontWeight="SemiBold"/>
+                        </Grid>
+                        <ProgressBar x:Name="ReductionMeter" Minimum="0" Maximum="30" Height="12"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>

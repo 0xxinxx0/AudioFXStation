@@ -1,0 +1,105 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="AudioFXStation.EqualizerWindow"
+        Title="5-Band Equalizer"
+        Width="760"
+        Height="520"
+        MinWidth="640"
+        MinHeight="460"
+        Foreground="#F0F3F4">
+
+    <Window.Background>
+        <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+            <GradientStop Color="#191525" Offset="0"/>
+            <GradientStop Color="#0C0A12" Offset="0.55"/>
+            <GradientStop Color="#1B1525" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
+
+    <Window.Styles>
+        <Style Selector="Border.band-card">
+            <Setter Property="Background" Value="#B5222B3B"/>
+            <Setter Property="BorderBrush" Value="#735B7E"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="16"/>
+            <Setter Property="RenderTransformOrigin" Value="50%,50%"/>
+            <Setter Property="RenderTransform" Value="scale(1)"/>
+            <Setter Property="BoxShadow" Value="0 8 22 0 #45000000"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.22"/>
+                    <BrushTransition Property="BorderBrush" Duration="0:0:0.22"/>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.16"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Border.band-card:pointerover">
+            <Setter Property="Background" Value="#D6372E4A"/>
+            <Setter Property="BorderBrush" Value="#B5A0EA"/>
+            <Setter Property="RenderTransform" Value="scale(1.025)"/>
+        </Style>
+        <Style Selector="Slider">
+            <Setter Property="Foreground" Value="#C7A1FF"/>
+        </Style>
+    </Window.Styles>
+
+    <Grid RowDefinitions="Auto,*,Auto" Margin="26">
+        <Grid ColumnDefinitions="*,Auto" VerticalAlignment="Center">
+            <StackPanel Spacing="4">
+                <TextBlock Text="5-Band Equalizer" FontSize="24" FontWeight="Bold"/>
+                <TextBlock Text="SHAPE YOUR SOUND" FontSize="10" FontWeight="SemiBold" Foreground="#B9A8D0"/>
+            </StackPanel>
+            <Border Grid.Column="1" Background="#30233F" BorderBrush="#78628D" BorderThickness="1" CornerRadius="12" Padding="12,7" VerticalAlignment="Center">
+                <TextBlock Text="FREQUENCY RESPONSE" FontSize="9" FontWeight="SemiBold" Foreground="#C7A1FF"/>
+            </Border>
+        </Grid>
+
+        <Border Grid.Row="1"
+                Background="#B90F0B17"
+                BorderBrush="#806C5980"
+                BorderThickness="1"
+                CornerRadius="18"
+                Margin="0,18,0,14"
+                BoxShadow="0 12 34 0 #65000000">
+            <Canvas x:Name="GraphCanvas"/>
+        </Border>
+
+        <Grid Grid.Row="2" ColumnDefinitions="*,*,*,*,*" ColumnSpacing="10">
+            <Border Classes="band-card" Padding="10,10">
+                <StackPanel Spacing="5">
+                    <TextBlock Text="60 Hz" HorizontalAlignment="Center" FontWeight="SemiBold"/>
+                    <Slider x:Name="Band1" Minimum="-12" Maximum="12" Value="0" Orientation="Vertical" Height="90" HorizontalAlignment="Center"/>
+                    <TextBlock Text="SUB" FontSize="10" FontWeight="SemiBold" Foreground="#B9A8D0" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+            <Border Grid.Column="1" Classes="band-card" Padding="10,10">
+                <StackPanel Spacing="5">
+                    <TextBlock Text="250 Hz" HorizontalAlignment="Center" FontWeight="SemiBold"/>
+                    <Slider x:Name="Band2" Minimum="-12" Maximum="12" Value="0" Orientation="Vertical" Height="90" HorizontalAlignment="Center"/>
+                    <TextBlock Text="BASS" FontSize="10" FontWeight="SemiBold" Foreground="#B9A8D0" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+            <Border Grid.Column="2" Classes="band-card" Padding="10,10">
+                <StackPanel Spacing="5">
+                    <TextBlock Text="1 kHz" HorizontalAlignment="Center" FontWeight="SemiBold"/>
+                    <Slider x:Name="Band3" Minimum="-12" Maximum="12" Value="0" Orientation="Vertical" Height="90" HorizontalAlignment="Center"/>
+                    <TextBlock Text="MID" FontSize="10" FontWeight="SemiBold" Foreground="#B9A8D0" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+            <Border Grid.Column="3" Classes="band-card" Padding="10,10">
+                <StackPanel Spacing="5">
+                    <TextBlock Text="4 kHz" HorizontalAlignment="Center" FontWeight="SemiBold"/>
+                    <Slider x:Name="Band4" Minimum="-12" Maximum="12" Value="0" Orientation="Vertical" Height="90" HorizontalAlignment="Center"/>
+                    <TextBlock Text="HIGH MID" FontSize="10" FontWeight="SemiBold" Foreground="#B9A8D0" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+            <Border Grid.Column="4" Classes="band-card" Padding="10,10">
+                <StackPanel Spacing="5">
+                    <TextBlock Text="10 kHz" HorizontalAlignment="Center" FontWeight="SemiBold"/>
+                    <Slider x:Name="Band5" Minimum="-12" Maximum="12" Value="0" Orientation="Vertical" Height="90" HorizontalAlignment="Center"/>
+                    <TextBlock Text="TREBLE" FontSize="10" FontWeight="SemiBold" Foreground="#B9A8D0" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

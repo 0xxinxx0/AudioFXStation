@@ -1,0 +1,95 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="AudioFXStation.ReverbWindow"
+        Title="Reverb"
+        Width="500"
+        Height="470"
+        MinWidth="460"
+        MinHeight="440"
+        Foreground="#F0F3F4"
+        WindowStartupLocation="CenterOwner">
+
+    <Grid RowDefinitions="Auto,Auto,*" Margin="24">
+        <Grid ColumnDefinitions="*,Auto">
+            <StackPanel Spacing="5">
+                <TextBlock Text="Reverb" FontSize="25" FontWeight="Bold"/>
+                <TextBlock Text="ADD DEPTH AND SPACE" FontSize="10" Foreground="#B9A8D0"/>
+            </StackPanel>
+            <Border Grid.Column="1" Background="#30233F" CornerRadius="12" Padding="12,7">
+                <TextBlock Text="SPATIAL FX" FontSize="9" Foreground="#C7A1FF"/>
+            </Border>
+        </Grid>
+
+        <Border Grid.Row="1" Background="#B5222B3B" BorderBrush="#735B7E" BorderThickness="1" CornerRadius="18" Padding="18,14" Margin="0,16,0,14">
+            <StackPanel Spacing="11">
+                <Grid ColumnDefinitions="*,Auto">
+                    <StackPanel Spacing="4">
+                        <TextBlock Text="Wet / dry mix" FontSize="15" FontWeight="SemiBold"/>
+                        <TextBlock Text="Blend the original signal with the room" FontSize="10" Foreground="#B9A8D0"/>
+                    </StackPanel>
+                    <TextBlock x:Name="MixValue" Grid.Column="1" Text="30%" Foreground="#C7A1FF" FontSize="20" FontWeight="Bold"/>
+                </Grid>
+                <Slider x:Name="MixSlider" Minimum="0" Maximum="100" Value="30" ValueChanged="MixSlider_ValueChanged"/>
+                <Grid ColumnDefinitions="*,*">
+                    <TextBlock Text="DRY" FontSize="9" Foreground="#A99BB8"/>
+                    <TextBlock Grid.Column="1" Text="WET" FontSize="9" Foreground="#A99BB8" HorizontalAlignment="Right"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+
+        <StackPanel Grid.Row="2" Spacing="10">
+            <Grid ColumnDefinitions="*,Auto">
+                <StackPanel Spacing="3">
+                    <TextBlock Text="Quick presets" FontSize="15" FontWeight="SemiBold"/>
+                    <TextBlock Text="Find the space that fits your track" FontSize="10" Foreground="#B9A8D0"/>
+                </StackPanel>
+                <TextBlock Grid.Column="1" Text="4 SOUNDS" FontSize="9" Foreground="#A99BB8" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,*" ColumnSpacing="8" RowSpacing="8">
+                <Button Classes="preset" Content="Dry" Click="Dry_Click" HorizontalAlignment="Stretch"/>
+                <Button Classes="preset" Grid.Column="1" Content="Subtle" Click="Subtle_Click" HorizontalAlignment="Stretch"/>
+                <Button Classes="preset" Grid.Row="1" Content="Slowed + Reverb" Click="Slowed_Click" HorizontalAlignment="Stretch"/>
+                <Button Classes="preset" Grid.Row="1" Grid.Column="1" Content="Deep Space" Click="DeepSpace_Click" HorizontalAlignment="Stretch"/>
+            </Grid>
+        </StackPanel>
+    </Grid>
+
+    <Window.Background>
+        <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+            <GradientStop Color="#191525" Offset="0"/>
+            <GradientStop Color="#0C0A12" Offset="0.55"/>
+            <GradientStop Color="#1B1525" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
+
+    <Window.Styles>
+        <Style Selector="Button">
+            <Setter Property="Background" Value="#C12A2438"/>
+            <Setter Property="Foreground" Value="#F0EAF7"/>
+            <Setter Property="BorderBrush" Value="#74586E"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="13"/>
+            <Setter Property="Height" Value="44"/>
+            <Setter Property="Padding" Value="10,0"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.22"/>
+                    <BrushTransition Property="BorderBrush" Duration="0:0:0.22"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Button:pointerover">
+            <Setter Property="Background" Value="#D13B2F4D"/>
+            <Setter Property="BorderBrush" Value="#C0A0F2"/>
+        </Style>
+        <Style Selector="Button.preset">
+            <Setter Property="Height" Value="42"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="CornerRadius" Value="12"/>
+        </Style>
+        <Style Selector="Slider">
+            <Setter Property="Foreground" Value="#C7A1FF"/>
+        </Style>
+    </Window.Styles>
+</Window>
