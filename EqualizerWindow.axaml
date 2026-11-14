@@ -6,100 +6,148 @@
         Height="520"
         MinWidth="640"
         MinHeight="460"
-        Foreground="#F0F3F4">
+        Foreground="#F0F3FA">
 
     <Window.Background>
         <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
-            <GradientStop Color="#191525" Offset="0"/>
-            <GradientStop Color="#0C0A12" Offset="0.55"/>
-            <GradientStop Color="#1B1525" Offset="1"/>
+            <GradientStop Color="#0A0A16" Offset="0"/>
+            <GradientStop Color="#0C0A1C" Offset="0.5"/>
+            <GradientStop Color="#160E2A" Offset="1"/>
         </LinearGradientBrush>
     </Window.Background>
 
+    <Window.Resources>
+        <ResourceDictionary>
+            <RadialGradientBrush x:Key="BlobViolet">
+                <GradientStop Color="#66A78BFF" Offset="0"/>
+                <GradientStop Color="#26A78BFF" Offset="0.55"/>
+                <GradientStop Color="#00A78BFF" Offset="1"/>
+            </RadialGradientBrush>
+            <RadialGradientBrush x:Key="BlobCyan">
+                <GradientStop Color="#5200E5FF" Offset="0"/>
+                <GradientStop Color="#1C00E5FF" Offset="0.55"/>
+                <GradientStop Color="#0000E5FF" Offset="1"/>
+            </RadialGradientBrush>
+            <RadialGradientBrush x:Key="BlobMagenta">
+                <GradientStop Color="#40FF4D9E" Offset="0"/>
+                <GradientStop Color="#16FF4D9E" Offset="0.55"/>
+                <GradientStop Color="#00FF4D9E" Offset="1"/>
+            </RadialGradientBrush>
+            <LinearGradientBrush x:Key="FillBand" StartPoint="50%,100%" EndPoint="50%,0%">
+                <GradientStop Color="#C7A1FF" Offset="0"/>
+                <GradientStop Color="#8CF2FF" Offset="1"/>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="IconGrad" StartPoint="0%,0%" EndPoint="100%,100%">
+                <GradientStop Color="#C7A1FF" Offset="0"/>
+                <GradientStop Color="#7C5CFF" Offset="1"/>
+            </LinearGradientBrush>
+        </ResourceDictionary>
+    </Window.Resources>
+
     <Window.Styles>
-        <Style Selector="Border.band-card">
-            <Setter Property="Background" Value="#B5222B3B"/>
-            <Setter Property="BorderBrush" Value="#735B7E"/>
+        <Style Selector="Border.chip">
+            <Setter Property="Background" Value="#3D2A1E4A"/>
+            <Setter Property="BorderBrush" Value="#47C7A1FF"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="CornerRadius" Value="16"/>
-            <Setter Property="RenderTransformOrigin" Value="50%,50%"/>
-            <Setter Property="RenderTransform" Value="scale(1)"/>
-            <Setter Property="BoxShadow" Value="0 8 22 0 #45000000"/>
-            <Setter Property="Transitions">
-                <Transitions>
-                    <BrushTransition Property="Background" Duration="0:0:0.22"/>
-                    <BrushTransition Property="BorderBrush" Duration="0:0:0.22"/>
-                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.16"/>
-                </Transitions>
-            </Setter>
+            <Setter Property="CornerRadius" Value="9"/>
+            <Setter Property="Padding" Value="11,5"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
-        <Style Selector="Border.band-card:pointerover">
-            <Setter Property="Background" Value="#D6372E4A"/>
-            <Setter Property="BorderBrush" Value="#B5A0EA"/>
-            <Setter Property="RenderTransform" Value="scale(1.025)"/>
-        </Style>
-        <Style Selector="Slider">
-            <Setter Property="Foreground" Value="#C7A1FF"/>
+        <Style Selector="Border.band-value">
+            <Setter Property="Background" Value="#1FA78BFF"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Padding" Value="7,3"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
         </Style>
     </Window.Styles>
 
-    <Grid RowDefinitions="Auto,*,Auto" Margin="26">
-        <Grid ColumnDefinitions="*,Auto" VerticalAlignment="Center">
-            <StackPanel Spacing="4">
-                <TextBlock Text="5-Band Equalizer" FontSize="24" FontWeight="Bold"/>
-                <TextBlock Text="SHAPE YOUR SOUND" FontSize="10" FontWeight="SemiBold" Foreground="#B9A8D0"/>
-            </StackPanel>
-            <Border Grid.Column="1" Background="#30233F" BorderBrush="#78628D" BorderThickness="1" CornerRadius="12" Padding="12,7" VerticalAlignment="Center">
-                <TextBlock Text="FREQUENCY RESPONSE" FontSize="9" FontWeight="SemiBold" Foreground="#C7A1FF"/>
-            </Border>
-        </Grid>
+    <Panel>
+        <Canvas IsHitTestVisible="False">
+            <Ellipse Width="500" Height="500" Canvas.Left="-140" Canvas.Top="-180" Fill="{StaticResource BlobViolet}"/>
+            <Ellipse Width="540" Height="540" Canvas.Left="520" Canvas.Top="-230" Fill="{StaticResource BlobCyan}"/>
+            <Ellipse Width="480" Height="480" Canvas.Left="420" Canvas.Top="330" Fill="{StaticResource BlobMagenta}"/>
+            <Ellipse Width="3" Height="3" Canvas.Left="240" Canvas.Top="120" Fill="#4DFFFFFF"/>
+            <Ellipse Width="2" Height="2" Canvas.Left="480" Canvas.Top="90" Fill="#33FFFFFF"/>
+            <Ellipse Width="3" Height="3" Canvas.Left="620" Canvas.Top="200" Fill="#40FFFFFF"/>
+            <Ellipse Width="2" Height="2" Canvas.Left="140" Canvas.Top="300" Fill="#2EFFFFFF"/>
+        </Canvas>
 
-        <Border Grid.Row="1"
-                Background="#B90F0B17"
-                BorderBrush="#806C5980"
-                BorderThickness="1"
-                CornerRadius="18"
-                Margin="0,18,0,14"
-                BoxShadow="0 12 34 0 #65000000">
-            <Canvas x:Name="GraphCanvas"/>
-        </Border>
+        <Grid RowDefinitions="Auto,*,Auto" Margin="24">
+            <Grid ColumnDefinitions="Auto,*,Auto">
+                <StackPanel Orientation="Horizontal" Spacing="14">
+                    <Border Width="46" Height="46" CornerRadius="14" VerticalAlignment="Center"
+                            Background="{StaticResource IconGrad}" BorderBrush="#54FFFFFF" BorderThickness="1"
+                            BoxShadow="0 10 22 0 #52071020, 0 0 18 0 #3DC7A1FF">
+                        <StackPanel Orientation="Horizontal" Spacing="3" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <Border Width="3" Height="11" CornerRadius="1.5" Background="#F4EDFF"/>
+                            <Border Width="3" Height="18" CornerRadius="1.5" Background="#F4EDFF"/>
+                            <Border Width="3" Height="14" CornerRadius="1.5" Background="#F4EDFF"/>
+                        </StackPanel>
+                    </Border>
+                    <StackPanel Spacing="2" VerticalAlignment="Center">
+                        <TextBlock Text="5-Band Equalizer" FontSize="22" FontWeight="Bold" Foreground="#F4F6FF"/>
+                        <TextBlock Text="SHAPE YOUR SOUND" FontSize="9.5" FontWeight="SemiBold" Foreground="#9A8EC2"/>
+                    </StackPanel>
+                </StackPanel>
+                <Border Grid.Column="2" Classes="chip">
+                    <TextBlock Text="FREQUENCY RESPONSE" FontSize="9" FontWeight="SemiBold" Foreground="#C7A1FF"/>
+                </Border>
+            </Grid>
 
-        <Grid Grid.Row="2" ColumnDefinitions="*,*,*,*,*" ColumnSpacing="10">
-            <Border Classes="band-card" Padding="10,10">
-                <StackPanel Spacing="5">
-                    <TextBlock Text="60 Hz" HorizontalAlignment="Center" FontWeight="SemiBold"/>
-                    <Slider x:Name="Band1" Minimum="-12" Maximum="12" Value="0" Orientation="Vertical" Height="90" HorizontalAlignment="Center"/>
-                    <TextBlock Text="SUB" FontSize="10" FontWeight="SemiBold" Foreground="#B9A8D0" HorizontalAlignment="Center"/>
-                </StackPanel>
+            <Border Grid.Row="1" Classes="glass" Margin="0,16,0,14" Padding="10">
+                <Border Classes="viewport" ClipToBounds="True">
+                    <Canvas x:Name="GraphCanvas"/>
+                </Border>
             </Border>
-            <Border Grid.Column="1" Classes="band-card" Padding="10,10">
-                <StackPanel Spacing="5">
-                    <TextBlock Text="250 Hz" HorizontalAlignment="Center" FontWeight="SemiBold"/>
-                    <Slider x:Name="Band2" Minimum="-12" Maximum="12" Value="0" Orientation="Vertical" Height="90" HorizontalAlignment="Center"/>
-                    <TextBlock Text="BASS" FontSize="10" FontWeight="SemiBold" Foreground="#B9A8D0" HorizontalAlignment="Center"/>
-                </StackPanel>
-            </Border>
-            <Border Grid.Column="2" Classes="band-card" Padding="10,10">
-                <StackPanel Spacing="5">
-                    <TextBlock Text="1 kHz" HorizontalAlignment="Center" FontWeight="SemiBold"/>
-                    <Slider x:Name="Band3" Minimum="-12" Maximum="12" Value="0" Orientation="Vertical" Height="90" HorizontalAlignment="Center"/>
-                    <TextBlock Text="MID" FontSize="10" FontWeight="SemiBold" Foreground="#B9A8D0" HorizontalAlignment="Center"/>
-                </StackPanel>
-            </Border>
-            <Border Grid.Column="3" Classes="band-card" Padding="10,10">
-                <StackPanel Spacing="5">
-                    <TextBlock Text="4 kHz" HorizontalAlignment="Center" FontWeight="SemiBold"/>
-                    <Slider x:Name="Band4" Minimum="-12" Maximum="12" Value="0" Orientation="Vertical" Height="90" HorizontalAlignment="Center"/>
-                    <TextBlock Text="HIGH MID" FontSize="10" FontWeight="SemiBold" Foreground="#B9A8D0" HorizontalAlignment="Center"/>
-                </StackPanel>
-            </Border>
-            <Border Grid.Column="4" Classes="band-card" Padding="10,10">
-                <StackPanel Spacing="5">
-                    <TextBlock Text="10 kHz" HorizontalAlignment="Center" FontWeight="SemiBold"/>
-                    <Slider x:Name="Band5" Minimum="-12" Maximum="12" Value="0" Orientation="Vertical" Height="90" HorizontalAlignment="Center"/>
-                    <TextBlock Text="TREBLE" FontSize="10" FontWeight="SemiBold" Foreground="#B9A8D0" HorizontalAlignment="Center"/>
-                </StackPanel>
-            </Border>
+
+
+            <Grid Grid.Row="2" ColumnDefinitions="*,*,*,*,*" ColumnSpacing="10">
+                <Border Classes="glass" Padding="10,12" CornerRadius="16">
+                    <StackPanel Spacing="7">
+                        <TextBlock Text="60 Hz" HorizontalAlignment="Center" FontWeight="SemiBold" FontSize="12" Foreground="#F0F3FA"/>
+                        <Slider x:Name="Band1" Minimum="-12" Maximum="12" Value="0" Orientation="Vertical" Height="116" HorizontalAlignment="Center" Foreground="{StaticResource FillBand}"/>
+                        <Border Classes="band-value">
+                            <TextBlock Text="SUB" FontSize="8.5" FontWeight="SemiBold" Foreground="#C7A1FF" HorizontalAlignment="Center"/>
+                        </Border>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="1" Classes="glass" Padding="10,12" CornerRadius="16">
+                    <StackPanel Spacing="7">
+                        <TextBlock Text="250 Hz" HorizontalAlignment="Center" FontWeight="SemiBold" FontSize="12" Foreground="#F0F3FA"/>
+                        <Slider x:Name="Band2" Minimum="-12" Maximum="12" Value="0" Orientation="Vertical" Height="116" HorizontalAlignment="Center" Foreground="{StaticResource FillBand}"/>
+                        <Border Classes="band-value">
+                            <TextBlock Text="BASS" FontSize="8.5" FontWeight="SemiBold" Foreground="#C7A1FF" HorizontalAlignment="Center"/>
+                        </Border>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="2" Classes="glass" Padding="10,12" CornerRadius="16">
+                    <StackPanel Spacing="7">
+                        <TextBlock Text="1 kHz" HorizontalAlignment="Center" FontWeight="SemiBold" FontSize="12" Foreground="#F0F3FA"/>
+                        <Slider x:Name="Band3" Minimum="-12" Maximum="12" Value="0" Orientation="Vertical" Height="116" HorizontalAlignment="Center" Foreground="{StaticResource FillBand}"/>
+                        <Border Classes="band-value">
+                            <TextBlock Text="MID" FontSize="8.5" FontWeight="SemiBold" Foreground="#C7A1FF" HorizontalAlignment="Center"/>
+                        </Border>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="3" Classes="glass" Padding="10,12" CornerRadius="16">
+                    <StackPanel Spacing="7">
+                        <TextBlock Text="4 kHz" HorizontalAlignment="Center" FontWeight="SemiBold" FontSize="12" Foreground="#F0F3FA"/>
+                        <Slider x:Name="Band4" Minimum="-12" Maximum="12" Value="0" Orientation="Vertical" Height="116" HorizontalAlignment="Center" Foreground="{StaticResource FillBand}"/>
+                        <Border Classes="band-value">
+                            <TextBlock Text="HIGH MID" FontSize="8.5" FontWeight="SemiBold" Foreground="#C7A1FF" HorizontalAlignment="Center"/>
+                        </Border>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="4" Classes="glass" Padding="10,12" CornerRadius="16">
+                    <StackPanel Spacing="7">
+                        <TextBlock Text="10 kHz" HorizontalAlignment="Center" FontWeight="SemiBold" FontSize="12" Foreground="#F0F3FA"/>
+                        <Slider x:Name="Band5" Minimum="-12" Maximum="12" Value="0" Orientation="Vertical" Height="116" HorizontalAlignment="Center" Foreground="{StaticResource FillBand}"/>
+                        <Border Classes="band-value">
+                            <TextBlock Text="TREBLE" FontSize="8.5" FontWeight="SemiBold" Foreground="#C7A1FF" HorizontalAlignment="Center"/>
+                        </Border>
+                    </StackPanel>
+                </Border>
+            </Grid>
         </Grid>
-    </Grid>
+    </Panel>
 </Window>

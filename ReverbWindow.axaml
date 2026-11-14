@@ -6,90 +6,142 @@
         Height="470"
         MinWidth="460"
         MinHeight="440"
-        Foreground="#F0F3F4"
+        Foreground="#F0F3FA"
         WindowStartupLocation="CenterOwner">
-
-    <Grid RowDefinitions="Auto,Auto,*" Margin="24">
-        <Grid ColumnDefinitions="*,Auto">
-            <StackPanel Spacing="5">
-                <TextBlock Text="Reverb" FontSize="25" FontWeight="Bold"/>
-                <TextBlock Text="ADD DEPTH AND SPACE" FontSize="10" Foreground="#B9A8D0"/>
-            </StackPanel>
-            <Border Grid.Column="1" Background="#30233F" CornerRadius="12" Padding="12,7">
-                <TextBlock Text="SPATIAL FX" FontSize="9" Foreground="#C7A1FF"/>
-            </Border>
-        </Grid>
-
-        <Border Grid.Row="1" Background="#B5222B3B" BorderBrush="#735B7E" BorderThickness="1" CornerRadius="18" Padding="18,14" Margin="0,16,0,14">
-            <StackPanel Spacing="11">
-                <Grid ColumnDefinitions="*,Auto">
-                    <StackPanel Spacing="4">
-                        <TextBlock Text="Wet / dry mix" FontSize="15" FontWeight="SemiBold"/>
-                        <TextBlock Text="Blend the original signal with the room" FontSize="10" Foreground="#B9A8D0"/>
-                    </StackPanel>
-                    <TextBlock x:Name="MixValue" Grid.Column="1" Text="30%" Foreground="#C7A1FF" FontSize="20" FontWeight="Bold"/>
-                </Grid>
-                <Slider x:Name="MixSlider" Minimum="0" Maximum="100" Value="30" ValueChanged="MixSlider_ValueChanged"/>
-                <Grid ColumnDefinitions="*,*">
-                    <TextBlock Text="DRY" FontSize="9" Foreground="#A99BB8"/>
-                    <TextBlock Grid.Column="1" Text="WET" FontSize="9" Foreground="#A99BB8" HorizontalAlignment="Right"/>
-                </Grid>
-            </StackPanel>
-        </Border>
-
-        <StackPanel Grid.Row="2" Spacing="10">
-            <Grid ColumnDefinitions="*,Auto">
-                <StackPanel Spacing="3">
-                    <TextBlock Text="Quick presets" FontSize="15" FontWeight="SemiBold"/>
-                    <TextBlock Text="Find the space that fits your track" FontSize="10" Foreground="#B9A8D0"/>
-                </StackPanel>
-                <TextBlock Grid.Column="1" Text="4 SOUNDS" FontSize="9" Foreground="#A99BB8" VerticalAlignment="Center"/>
-            </Grid>
-            <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,*" ColumnSpacing="8" RowSpacing="8">
-                <Button Classes="preset" Content="Dry" Click="Dry_Click" HorizontalAlignment="Stretch"/>
-                <Button Classes="preset" Grid.Column="1" Content="Subtle" Click="Subtle_Click" HorizontalAlignment="Stretch"/>
-                <Button Classes="preset" Grid.Row="1" Content="Slowed + Reverb" Click="Slowed_Click" HorizontalAlignment="Stretch"/>
-                <Button Classes="preset" Grid.Row="1" Grid.Column="1" Content="Deep Space" Click="DeepSpace_Click" HorizontalAlignment="Stretch"/>
-            </Grid>
-        </StackPanel>
-    </Grid>
 
     <Window.Background>
         <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
-            <GradientStop Color="#191525" Offset="0"/>
-            <GradientStop Color="#0C0A12" Offset="0.55"/>
-            <GradientStop Color="#1B1525" Offset="1"/>
+            <GradientStop Color="#081020" Offset="0"/>
+            <GradientStop Color="#0A0E22" Offset="0.5"/>
+            <GradientStop Color="#14102A" Offset="1"/>
         </LinearGradientBrush>
     </Window.Background>
 
+    <Window.Resources>
+        <ResourceDictionary>
+            <RadialGradientBrush x:Key="BlobCyan">
+                <GradientStop Color="#5C00E5FF" Offset="0"/>
+                <GradientStop Color="#2200E5FF" Offset="0.55"/>
+                <GradientStop Color="#0000E5FF" Offset="1"/>
+            </RadialGradientBrush>
+            <RadialGradientBrush x:Key="BlobViolet">
+                <GradientStop Color="#59A78BFF" Offset="0"/>
+                <GradientStop Color="#1FA78BFF" Offset="0.55"/>
+                <GradientStop Color="#00A78BFF" Offset="1"/>
+            </RadialGradientBrush>
+            <RadialGradientBrush x:Key="BlobMagenta">
+                <GradientStop Color="#40FF4D9E" Offset="0"/>
+                <GradientStop Color="#14FF4D9E" Offset="0.55"/>
+                <GradientStop Color="#00FF4D9E" Offset="1"/>
+            </RadialGradientBrush>
+            <LinearGradientBrush x:Key="FillMix" StartPoint="0%,50%" EndPoint="100%,50%">
+                <GradientStop Color="#8CF2FF" Offset="0"/>
+                <GradientStop Color="#C7A1FF" Offset="1"/>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="TextGrad" StartPoint="0%,50%" EndPoint="100%,50%">
+                <GradientStop Color="#8CF2FF" Offset="0"/>
+                <GradientStop Color="#C7A1FF" Offset="1"/>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="IconGrad" StartPoint="0%,0%" EndPoint="100%,100%">
+                <GradientStop Color="#5EEAFF" Offset="0"/>
+                <GradientStop Color="#9A7CFF" Offset="1"/>
+            </LinearGradientBrush>
+        </ResourceDictionary>
+    </Window.Resources>
+
     <Window.Styles>
-        <Style Selector="Button">
-            <Setter Property="Background" Value="#C12A2438"/>
-            <Setter Property="Foreground" Value="#F0EAF7"/>
-            <Setter Property="BorderBrush" Value="#74586E"/>
+        <Style Selector="Border.chip">
+            <Setter Property="Background" Value="#3D1A2E4A"/>
+            <Setter Property="BorderBrush" Value="#478CF2FF"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="CornerRadius" Value="13"/>
-            <Setter Property="Height" Value="44"/>
-            <Setter Property="Padding" Value="10,0"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Transitions">
-                <Transitions>
-                    <BrushTransition Property="Background" Duration="0:0:0.22"/>
-                    <BrushTransition Property="BorderBrush" Duration="0:0:0.22"/>
-                </Transitions>
-            </Setter>
+            <Setter Property="CornerRadius" Value="9"/>
+            <Setter Property="Padding" Value="11,5"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
-        <Style Selector="Button:pointerover">
-            <Setter Property="Background" Value="#D13B2F4D"/>
-            <Setter Property="BorderBrush" Value="#C0A0F2"/>
-        </Style>
+
         <Style Selector="Button.preset">
-            <Setter Property="Height" Value="42"/>
-            <Setter Property="FontSize" Value="11"/>
-            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Height" Value="46"/>
+            <Setter Property="CornerRadius" Value="15"/>
+            <Setter Property="Padding" Value="12,0"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Background" Value="#5E16223C"/>
+            <Setter Property="BorderBrush" Value="#2BFFFFFF"/>
         </Style>
-        <Style Selector="Slider">
-            <Setter Property="Foreground" Value="#C7A1FF"/>
+        <Style Selector="Button.preset:pointerover">
+            <Setter Property="Background" Value="#82305366"/>
+            <Setter Property="BorderBrush" Value="#5EFFFFFF"/>
+        </Style>
+        <Style Selector="Button.preset:pressed">
+            <Setter Property="RenderTransform" Value="scale(0.97)"/>
         </Style>
     </Window.Styles>
+
+    <Panel>
+        <Canvas IsHitTestVisible="False">
+            <Ellipse Width="460" Height="460" Canvas.Left="-150" Canvas.Top="-180" Fill="{StaticResource BlobCyan}"/>
+            <Ellipse Width="480" Height="480" Canvas.Left="260" Canvas.Top="-220" Fill="{StaticResource BlobViolet}"/>
+            <Ellipse Width="440" Height="440" Canvas.Left="140" Canvas.Top="300" Fill="{StaticResource BlobMagenta}"/>
+            <Ellipse Width="3" Height="3" Canvas.Left="210" Canvas.Top="110" Fill="#4DFFFFFF"/>
+            <Ellipse Width="2" Height="2" Canvas.Left="430" Canvas.Top="90" Fill="#33FFFFFF"/>
+            <Ellipse Width="3" Height="3" Canvas.Left="330" Canvas.Top="260" Fill="#40FFFFFF"/>
+            <Ellipse Width="2" Height="2" Canvas.Left="90" Canvas.Top="290" Fill="#2EFFFFFF"/>
+        </Canvas>
+
+        <Grid RowDefinitions="Auto,Auto,*" Margin="22">
+            <Grid ColumnDefinitions="Auto,*,Auto">
+                <StackPanel Orientation="Horizontal" Spacing="14">
+                    <Border Width="46" Height="46" CornerRadius="14" VerticalAlignment="Center"
+                            Background="{StaticResource IconGrad}" BorderBrush="#54FFFFFF" BorderThickness="1"
+                            BoxShadow="0 10 22 0 #52071020, 0 0 18 0 #3D8CF2FF">
+                        <StackPanel Orientation="Horizontal" Spacing="4" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <Ellipse Width="5" Height="5" Fill="#F2FDFF"/>
+                            <Ellipse Width="5" Height="5" Fill="#9CEAF9FF"/>
+                            <Ellipse Width="5" Height="5" Fill="#4DEAF9FF"/>
+                        </StackPanel>
+                    </Border>
+                    <StackPanel Spacing="2" VerticalAlignment="Center">
+                        <TextBlock Text="Reverb" FontSize="22" FontWeight="Bold" Foreground="#F4F6FF"/>
+                        <TextBlock Text="ADD DEPTH AND SPACE" FontSize="9.5" FontWeight="SemiBold" Foreground="#8FA0C2"/>
+                    </StackPanel>
+                </StackPanel>
+                <Border Grid.Column="2" Classes="chip">
+                    <TextBlock Text="SPATIAL FX" FontSize="9" FontWeight="SemiBold" Foreground="#8CF2FF"/>
+                </Border>
+            </Grid>
+
+            <Border Grid.Row="1" Classes="glass" Padding="18,16" Margin="0,16,0,14">
+                <StackPanel Spacing="12">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="Wet / dry mix" FontSize="15" FontWeight="SemiBold" Foreground="#F4F8FF"/>
+                            <TextBlock Text="Blend the original signal with the room" FontSize="9.5" Foreground="#7E8CA6"/>
+                        </StackPanel>
+                        <TextBlock x:Name="MixValue" Grid.Column="1" Text="30%" Foreground="{StaticResource TextGrad}" FontSize="21" FontWeight="Bold" VerticalAlignment="Center"/>
+                    </Grid>
+                    <Slider x:Name="MixSlider" Minimum="0" Maximum="100" Value="30" Height="32" Foreground="{StaticResource FillMix}" ValueChanged="MixSlider_ValueChanged"/>
+                    <Grid ColumnDefinitions="*,*">
+                        <TextBlock Text="DRY" FontSize="9" FontWeight="SemiBold" Foreground="#5E6C88"/>
+                        <TextBlock Grid.Column="1" Text="WET" FontSize="9" FontWeight="SemiBold" Foreground="#5E6C88" HorizontalAlignment="Right"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <StackPanel Grid.Row="2" Spacing="10">
+                <Grid ColumnDefinitions="*,Auto">
+                    <StackPanel Spacing="3">
+                        <TextBlock Text="Quick presets" FontSize="15" FontWeight="SemiBold" Foreground="#F4F8FF"/>
+                        <TextBlock Text="Find the space that fits your track" FontSize="9.5" Foreground="#7E8CA6"/>
+                    </StackPanel>
+                    <TextBlock Grid.Column="1" Text="4 SOUNDS" FontSize="9" FontWeight="SemiBold" Foreground="#5E6C88" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,*" ColumnSpacing="10" RowSpacing="10">
+                    <Button Classes="preset" Content="Dry" Click="Dry_Click" HorizontalAlignment="Stretch"/>
+                    <Button Grid.Column="1" Classes="preset" Content="Subtle" Click="Subtle_Click" HorizontalAlignment="Stretch"/>
+                    <Button Grid.Row="1" Classes="preset" Content="Slowed + Reverb" Click="Slowed_Click" HorizontalAlignment="Stretch"/>
+                    <Button Grid.Row="1" Grid.Column="1" Classes="preset" Content="Deep Space" Click="DeepSpace_Click" HorizontalAlignment="Stretch"/>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </Panel>
 </Window>
